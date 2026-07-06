@@ -1,0 +1,6 @@
+@AfyaApp_HostAddress = http://localhost:5170
+
+GET {{AfyaApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
