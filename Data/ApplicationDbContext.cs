@@ -1,14 +1,20 @@
-﻿using AfyaApp.Models.Entities;
+﻿//using AfyaApp.Models.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AfyaApp.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options):base(options)
+        public ApplicationDbContext(DbContextOptions options) : base(options)
         {
-            
         }
-        public DbSet<User> Users { get; set; }
+
+        protected ApplicationDbContext()
+        {
+        }
+
+      //  public DbSet<User> Patient { get; set; }
     }
 }
