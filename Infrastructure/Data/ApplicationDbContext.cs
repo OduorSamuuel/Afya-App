@@ -9,7 +9,7 @@ namespace AfyaApp.Infrastracture.Data
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<IdentityUser>(options)
     {
 
-     protected void onModelCreating(ModelBuilder modelBuilder)
+     protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(

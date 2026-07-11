@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="Models\Entities\" />
     <Folder Include="Features\" />
     <Folder Include="Domain\" />
