@@ -1,8 +1,7 @@
-
-using AfyaApp.Data;
 using Microsoft.OpenApi;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using AfyaApp.Infrastracture.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,7 +53,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", " API V1");
-        c.RoutePrefix = string.Empty; // Set Swagger UI at the root URL
+        c.RoutePrefix = string.Empty; 
     });
 }
 
