@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <Folder Include="Models\Entities\" />
+    <Folder Include="Features\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Configurations\" />
   </ItemGroup>
 
 </Project>
