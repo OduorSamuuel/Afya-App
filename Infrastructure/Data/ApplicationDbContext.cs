@@ -1,15 +1,16 @@
 ﻿
+using AfyaApp.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace AfyaApp.Infrastracture.Data
+namespace AfyaApp.Infrastructure.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<IdentityUser>(options)
     {
-
-     protected void onModelCreating(ModelBuilder modelBuilder)
+        public DbSet<Patient> Patients => Set<Patient>();
+        protected  override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(
