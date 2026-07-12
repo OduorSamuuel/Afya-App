@@ -18,14 +18,7 @@ Patients themselves are not system users. They exist as records created by the R
 Login splits into two role-based paths. The Doctor path handles clinical review and updates; the Receptionist path handles intake and queueing. Both converge on a shared `PatientRecord` entity, which is the single source of truth for patient data across the system.
 
 
-## Data model (draft)
 
-| Entity | Key fields |
-|---|---|
-| `User` | id, name, email, password hash, role |
-| `Patient` | id, name, DOB, contact info, created_by |
-| `MedicalRecord` | id, patient_id, doctor_id, diagnosis, prescription, notes, created_at |
-| `Queue` | id, patient_id, status, created_at |
 
 ## Tech stack
 
