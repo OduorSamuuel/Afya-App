@@ -1,6 +1,21 @@
-﻿namespace AfyaApp.Infrastructure.Data
+﻿using AfyaApp.Infrastracture.Data;
+using Ardalis.SharedKernel;
+using Ardalis.Specification.EntityFrameworkCore;
+
+
+
+namespace AfyaApp.Infrastructure.Data
 {
-    public class EfRepository
+    // inherit from Ardalis.Specification type
+    public class EfRepository<T>(ApplicationDbContext applicationDbContext):
+        RepositoryBase<T>(applicationDbContext),IReadRepository<T> where T : class, IAggregateRoot
     {
+
     }
+   
+
+
+
 }
+
+
