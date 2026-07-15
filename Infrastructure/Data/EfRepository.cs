@@ -1,4 +1,4 @@
-﻿using AfyaApp.Infrastracture.Data;
+﻿using AfyaApp.Infrastructure.Data;
 using Ardalis.SharedKernel;
 using Ardalis.Specification.EntityFrameworkCore;
 

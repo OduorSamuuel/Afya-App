@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace AfyaApp.Infrastructure.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<IdentityUser>(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<IdentityUser,IdentityRole,string>(options)
     {
         public DbSet<Patient> Patients => Set<Patient>();
         protected  override void OnModelCreating(ModelBuilder modelBuilder)
