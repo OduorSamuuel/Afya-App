@@ -8,8 +8,8 @@ namespace AfyaApp.Infrastructure.Data
 {
     // inherit from Ardalis.Specification type
     public class EfRepository<T>(ApplicationDbContext applicationDbContext)
-    : RepositoryBase<T>(applicationDbContext), IRepository<T>
-    where T : class, IAggregateRoot
+          : RepositoryBase<T>(applicationDbContext), IRepository<T>, IReadRepository<T>
+          where T : class, IAggregateRoot
     {
 
     }
