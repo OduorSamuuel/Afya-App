@@ -1,9 +1,9 @@
 using AfyaApp.Infrastructure.Data;
+using Ardalis.SharedKernel;
 using FastEndpoints;
+using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,32 +12,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddFastEndpoints();
 
-builder.Services.AddSwaggerGen(options =>
+builder.Services.SwaggerDocument(o =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
+    o.DocumentSettings = s =>
     {
-        Title = "AfyaApp API",
-        Version = "v1"
-    });
-
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Please enter token"
-    });
-
-    options.AddSecurityRequirement(document =>
-        new OpenApiSecurityRequirement
+        s.Title = "AfyaApp API";
+        s.Version = "v1";
+        s.AddAuth("Bearer", new()
         {
-            [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+            Type = NSwag.OpenApiSecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            Description = "Please enter token"
         });
+    };
 });
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+builder.Services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddRoles<IdentityRole>()
@@ -45,7 +39,7 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 
 var app = builder.Build();
 
-// Seed roles 
+// Seed roles
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -62,21 +56,16 @@ using (var scope = app.Services.CreateScope())
 
 app.MapIdentityApi<IdentityUser>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", " API V1");
-        c.RoutePrefix = string.Empty;
-    });
-}
-
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseFastEndpoints();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwaggerGen(); 
+}
+
 app.MapControllers();
 
 app.Run();

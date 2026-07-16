@@ -7,8 +7,9 @@ using Ardalis.Specification.EntityFrameworkCore;
 namespace AfyaApp.Infrastructure.Data
 {
     // inherit from Ardalis.Specification type
-    public class EfRepository<T>(ApplicationDbContext applicationDbContext):
-        RepositoryBase<T>(applicationDbContext),IReadRepository<T> where T : class, IAggregateRoot
+    public class EfRepository<T>(ApplicationDbContext applicationDbContext)
+          : RepositoryBase<T>(applicationDbContext), IRepository<T>, IReadRepository<T>
+          where T : class, IAggregateRoot
     {
 
     }
