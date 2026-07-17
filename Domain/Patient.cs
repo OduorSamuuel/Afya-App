@@ -18,5 +18,13 @@ namespace AfyaApp.Domain
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 
         private Patient() : this(string.Empty, default, string.Empty, string.Empty, string.Empty) { }
+        public void UpdateDetails(string fullName, DateTime dateOfBirth, string gender, string phoneNumber)
+        {
+            FullName = fullName;
+            DateOfBirth = dateOfBirth;
+            Gender = gender;
+            PhoneNumber = phoneNumber;
+        }
     }
+
 }
