@@ -10,6 +10,7 @@ namespace AfyaApp.Infrastructure.Data
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<IdentityUser,IdentityRole,string>(options)
     {
         public DbSet<Patient> Patients => Set<Patient>();
+        public DbSet<MedicalRecord> MedicalRecords => Set<MedicalRecord>();
         protected  override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
