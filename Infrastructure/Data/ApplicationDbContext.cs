@@ -11,6 +11,7 @@ namespace AfyaApp.Infrastructure.Data
     {
         public DbSet<Patient> Patients => Set<Patient>();
         public DbSet<MedicalRecord> MedicalRecords => Set<MedicalRecord>();
+        public DbSet<QueueEntry> QueueEntries => Set<QueueEntry>();
         protected  override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
