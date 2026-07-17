@@ -23,5 +23,13 @@ namespace AfyaApp.Domain
 
         private MedicalRecord()
             : this(Guid.Empty, string.Empty, default, string.Empty, string.Empty, string.Empty) { }
+        public void UpdateDetails(DateTime visitDate, string diagnosis, string prescription, string notes)
+        {
+            VisitDate = visitDate;
+            Diagnosis = diagnosis;
+            Prescription = prescription;
+            Notes = notes;
+        }
     }
+
 }
