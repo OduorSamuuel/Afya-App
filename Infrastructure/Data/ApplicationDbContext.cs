@@ -12,15 +12,18 @@ namespace AfyaApp.Infrastructure.Data
         public DbSet<Patient> Patients => Set<Patient>();
         public DbSet<MedicalRecord> MedicalRecords => Set<MedicalRecord>();
         public DbSet<QueueEntry> QueueEntries => Set<QueueEntry>();
-        protected  override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(
-                Assembly.GetExecutingAssembly() );
+
+            modelBuilder.Entity<QueueEntry>()
+                .Property(q => q.Status)
+                .HasConversion<string>();
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-
-    public override int SaveChanges() =>
+        public override int SaveChanges() =>
     SaveChangesAsync().GetAwaiter().GetResult();
     }
 }

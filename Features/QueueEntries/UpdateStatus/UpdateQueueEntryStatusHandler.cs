@@ -2,17 +2,16 @@
 using Ardalis.SharedKernel;
 using FastEndpoints;
 
-namespace AfyaApp.Features.QueueEntries.Update;
+namespace AfyaApp.Features.QueueEntries.UpdateStatus;
 
-public sealed class UpdateQueueEntryHandler(IRepository<QueueEntry> repository)
-    : ICommandHandler<UpdateQueueEntryCommand, QueueEntryResponse?>
+public sealed class UpdateQueueEntryStatusHandler(IRepository<QueueEntry> repository)
+    : ICommandHandler<UpdateQueueEntryStatusCommand, QueueEntryResponse?>
 {
-    public async Task<QueueEntryResponse?> ExecuteAsync(UpdateQueueEntryCommand command, CancellationToken ct)
+    public async Task<QueueEntryResponse?> ExecuteAsync(UpdateQueueEntryStatusCommand command, CancellationToken ct)
     {
         var entry = await repository.GetByIdAsync(command.Id, ct);
         if (entry is null) return null;
 
-        entry.Reassign(command.AssignedDoctorId);
         entry.UpdateStatus(command.Status);
         await repository.UpdateAsync(entry, ct);
 
